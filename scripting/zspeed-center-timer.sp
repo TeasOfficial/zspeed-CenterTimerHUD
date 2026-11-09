@@ -42,6 +42,7 @@ public Plugin myinfo =
 #define DEFAULT_FINISH_DIFF                 true
 #define DEFAULT_FINISH_DIFF_MODE            0
 #define DEFAULT_FINISH_DIFF_POSITION_Y      0.66
+#define DEFAULT_FINISH_TIME_POSITION_Y      0.62
 #define DEFAULT_FINISH_DIFF_SHOW_PREFIX     false
 #define DEFAULT_FINISH_TIME                 true
 #define DEFAULT_COLOR_FINISH_FASTER         "Green"
@@ -52,6 +53,8 @@ public Plugin myinfo =
 #define FINISH_TIME_DELAY   0.1
 
 #define POSITION_CENTER   -1.0
+#define DEFAULT_FINISH_DIFF_POSITION_X  POSITION_CENTER
+#define DEFAULT_FINISH_TIME_POSITION_X  POSITION_CENTER
 #define HUD_BUF_SIZE      64
 
 // Redraw the timer HUD every N usercmds (~9 updates/sec at 66 tick).
@@ -126,6 +129,8 @@ enum struct FinishDiffCookies
 	Cookie finishDiffMode;
 	Cookie finishDiffPositionX;
 	Cookie finishDiffPositionY;
+	Cookie finishTimePositionX;
+	Cookie finishTimePositionY;
 	Cookie finishDiffShowPrefix;
 	Cookie finishTimeEnabled;
 	Cookie colorFinishFaster;
@@ -137,6 +142,8 @@ enum struct FinishDiffSettings
 	bool showFinishDiff;
 	int finishDiffMode;
 	float finishDiffPosition[2];
+	float finishTimePositionX;
+	float finishTimePositionY;
 	int finishDiffColorFaster[3];
 	int finishDiffColorSlower[3];
 	bool finishDiffShowPrefix;
@@ -224,6 +231,8 @@ public void OnPluginStart()
 	F_Cookies.finishDiffMode = new Cookie("zspeed_finish_diff_mode", "[zSpeed] Finish Diff Mode", CookieAccess_Protected);
 	F_Cookies.finishDiffPositionX = new Cookie("zspeed_finish_diff_positionx", "[zSpeed] Finish Diff Position (x)", CookieAccess_Protected);
 	F_Cookies.finishDiffPositionY = new Cookie("zspeed_finish_diff_positiony", "[zSpeed] Finish Diff Position (y)", CookieAccess_Protected);
+	F_Cookies.finishTimePositionX = new Cookie("zspeed_finish_time_positionx", "[zSpeed] Finish Time Position (x)", CookieAccess_Protected);
+	F_Cookies.finishTimePositionY = new Cookie("zspeed_finish_time_positiony", "[zSpeed] Finish Time Position (y)", CookieAccess_Protected);
 	F_Cookies.finishDiffShowPrefix = new Cookie("zspeed_finish_diff_show_prefix", "[zSpeed] Finish Diff Show Prefix", CookieAccess_Protected);
 	F_Cookies.finishTimeEnabled = new Cookie("zspeed_finish_time_enabled", "[zSpeed] Finish Time Enabled", CookieAccess_Protected);
 	F_Cookies.colorFinishFaster = new Cookie("zspeed_color_finish_faster", "[zSpeed] Finish Diff Faster Color", CookieAccess_Protected);
@@ -414,6 +423,8 @@ public void OnClientCookiesCached(int client)
 	F_Settings[client].showFinishDiff = GetCookie(client, F_Cookies.finishDiffEnabled, CT_Boolean);
 	F_Settings[client].finishDiffPosition[AXIS_X] = GetCookie(client, F_Cookies.finishDiffPositionX, CT_Float);
 	F_Settings[client].finishDiffPosition[AXIS_Y] = GetCookie(client, F_Cookies.finishDiffPositionY, CT_Float);
+	F_Settings[client].finishTimePositionX = GetCookie(client, F_Cookies.finishTimePositionX, CT_Float);
+	F_Settings[client].finishTimePositionY = GetCookie(client, F_Cookies.finishTimePositionY, CT_Float);
 	F_Settings[client].finishDiffShowPrefix = GetCookie(client, F_Cookies.finishDiffShowPrefix, CT_Boolean);
 	F_Settings[client].showFinishTime = GetCookie(client, F_Cookies.finishTimeEnabled, CT_Boolean);
 
@@ -448,8 +459,10 @@ void CheckFreshManFinishDiff(int client)
 {
 	EnsureCookie(client, F_Cookies.finishDiffEnabled, CT_Boolean, DEFAULT_FINISH_DIFF);
 	EnsureCookie(client, F_Cookies.finishDiffMode, CT_Integer, DEFAULT_FINISH_DIFF_MODE);
-	EnsureCookie(client, F_Cookies.finishDiffPositionX, CT_Float, POSITION_CENTER);
+	EnsureCookie(client, F_Cookies.finishDiffPositionX, CT_Float, DEFAULT_FINISH_DIFF_POSITION_X);
 	EnsureCookie(client, F_Cookies.finishDiffPositionY, CT_Float, DEFAULT_FINISH_DIFF_POSITION_Y);
+	EnsureCookie(client, F_Cookies.finishTimePositionX, CT_Float, DEFAULT_FINISH_TIME_POSITION_X);
+	EnsureCookie(client, F_Cookies.finishTimePositionY, CT_Float, DEFAULT_FINISH_TIME_POSITION_Y);
 	EnsureCookie(client, F_Cookies.finishDiffShowPrefix, CT_Boolean, DEFAULT_FINISH_DIFF_SHOW_PREFIX);
 	EnsureCookie(client, F_Cookies.finishTimeEnabled, CT_Boolean, DEFAULT_FINISH_TIME);
 }
@@ -491,6 +504,8 @@ void OnCookieChangedFinishDiff(int client)
 	SetCookie(client, F_Cookies.finishDiffMode, CT_Integer, F_Settings[client].finishDiffMode);
 	SetCookie(client, F_Cookies.finishDiffPositionX, CT_Float, F_Settings[client].finishDiffPosition[AXIS_X]);
 	SetCookie(client, F_Cookies.finishDiffPositionY, CT_Float, F_Settings[client].finishDiffPosition[AXIS_Y]);
+	SetCookie(client, F_Cookies.finishTimePositionX, CT_Float, F_Settings[client].finishTimePositionX);
+	SetCookie(client, F_Cookies.finishTimePositionY, CT_Float, F_Settings[client].finishTimePositionY);
 	SetCookie(client, F_Cookies.finishDiffShowPrefix, CT_Boolean, F_Settings[client].finishDiffShowPrefix);
 	SetCookie(client, F_Cookies.finishTimeEnabled, CT_Boolean, F_Settings[client].showFinishTime);
 }
@@ -504,8 +519,10 @@ void ResetClientState(int client)
 
 	F_Settings[client].showFinishDiff = DEFAULT_FINISH_DIFF;
 	F_Settings[client].finishDiffMode = DEFAULT_FINISH_DIFF_MODE;
-	F_Settings[client].finishDiffPosition[AXIS_X] = POSITION_CENTER;
+	F_Settings[client].finishDiffPosition[AXIS_X] = DEFAULT_FINISH_DIFF_POSITION_X;
 	F_Settings[client].finishDiffPosition[AXIS_Y] = DEFAULT_FINISH_DIFF_POSITION_Y;
+	F_Settings[client].finishTimePositionX = DEFAULT_FINISH_TIME_POSITION_X;
+	F_Settings[client].finishTimePositionY = DEFAULT_FINISH_TIME_POSITION_Y;
 	F_Settings[client].finishDiffShowPrefix = DEFAULT_FINISH_DIFF_SHOW_PREFIX;
 	F_Settings[client].showFinishTime = DEFAULT_FINISH_TIME;
 
@@ -722,12 +739,12 @@ void OpenFinishDiffMenu(int client)
 	FormatEx(sInfo, sizeof(sInfo), "Show Prefix: [%s]", F_Settings[client].finishDiffShowPrefix ? "ON" : "OFF");
 	menu.AddItem("prefix", sInfo);
 
+	FormatEx(sInfo, sizeof(sInfo), "Show Finish Time: [%s]", F_Settings[client].showFinishTime ? "ON" : "OFF");
+	menu.AddItem("finishtime", sInfo);
+
 	FormatEx(sInfo, sizeof(sInfo), "Position Settings\n    Current: %.3f, %.3f",
 		F_Settings[client].finishDiffPosition[AXIS_X], F_Settings[client].finishDiffPosition[AXIS_Y]);
 	menu.AddItem("position", sInfo);
-
-	FormatEx(sInfo, sizeof(sInfo), "Show Finish Time: [%s]", F_Settings[client].showFinishTime ? "ON" : "OFF");
-	menu.AddItem("finishtime", sInfo);
 
 	FormatEx(sInfo, sizeof(sInfo), "Color Settings\n    Faster Color: %s\n    Slower Color: %s", faster, slower);
 	menu.AddItem("colors", sInfo);
@@ -1336,8 +1353,8 @@ void DrawFinishTimeHUD(int client, float time)
 	FormatTimerWithPrecision(time, buffer, sizeof(buffer), TIME_PRECISION_THOUSANDTH);
 
 	SetHudTextParams(
-		F_Settings[client].finishDiffPosition[AXIS_X],
-		F_Settings[client].finishDiffPosition[AXIS_Y] - 0.04,
+		F_Settings[client].finishTimePositionX,
+		F_Settings[client].finishTimePositionY,
 		1.5,
 		T_Settings[client].colorTimeCompletion[0],
 		T_Settings[client].colorTimeCompletion[1],
