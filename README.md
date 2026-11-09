@@ -5,7 +5,7 @@ CenterTimer is a SourceMod HUD plugin for [Shavit Timer](https://github.com/shav
 It is designed to make it easier for players to see their current run time and their finish time. This is especially useful for players who repeatedly grind map records(like strafe maps): the finish time/difference is displayed right in the center of the screen, rather than having to read it from the shavit timer's chat message.
 
 <img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/8347a193-13e1-43a9-badf-06a24564f754" /> 
-<img width="305" height="285" alt="image" src="https://github.com/user-attachments/assets/56a0ed05-efab-4944-a159-548c70f0687f" />
+<img width="276" height="261" alt="image" src="https://github.com/user-attachments/assets/c6f67156-8323-4074-a9c2-38aded2035df" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14a17833-6c9d-42ce-8da2-443f74fcd92f" />
 
 
