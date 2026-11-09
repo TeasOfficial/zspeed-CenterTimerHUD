@@ -1,8 +1,9 @@
 # CenterTimer
 
-CenterTimer is a SourceMod HUD plugin for [Shavit Timer](https://github.com/shavitush/bhoptimer) bhop servers. It is a modified/reworked version of the [zSpeed - Center Speed HUD](https://github.com/TeasOfficial/zSpeed---Center-Speed-HUD) plugin, adapted into a standalone timer and finish-diff HUD.
+CenterTimer is a SourceMod HUD plugin for [Shavit Timer](https://github.com/shavitush/bhoptimer) bhop servers. It is a modified version of the [zSpeed - Center Speed HUD](https://github.com/TeasOfficial/zSpeed---Center-Speed-HUD) plugin, adapted into a standalone timer and finish-diff HUD.
 
-It provides a configurable on-screen timer, an optional finish time display, and a finish diff HUD that compares a run against the world record, server record, or personal best.
+It is designed to make it easier for players to see their current run time and their finish time. This is especially useful for players who repeatedly grind map records(like strafe maps): the finish time/difference is displayed right in the center of the screen, rather than having to read it from the shavit timer's chat message.
+
 <img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/8347a193-13e1-43a9-badf-06a24564f754" />
 <img width="306" height="267" alt="image" src="https://github.com/user-attachments/assets/0d6da72c-d9f4-4957-952b-9f685480f7ae" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d4ff085c-cf91-45df-9723-1fd1de086b4d" />
