@@ -742,12 +742,12 @@ void OpenFinishDiffMenu(int client)
 	FormatEx(sInfo, sizeof(sInfo), "Show Finish Time: [%s]", F_Settings[client].showFinishTime ? "ON" : "OFF");
 	menu.AddItem("finishtime", sInfo);
 
+	FormatEx(sInfo, sizeof(sInfo), "Color Settings\n    Faster Color: %s\n    Slower Color: %s", faster, slower);
+	menu.AddItem("colors", sInfo);
+
 	FormatEx(sInfo, sizeof(sInfo), "Position Settings\n    Current: %.3f, %.3f",
 		F_Settings[client].finishDiffPosition[AXIS_X], F_Settings[client].finishDiffPosition[AXIS_Y]);
 	menu.AddItem("position", sInfo);
-
-	FormatEx(sInfo, sizeof(sInfo), "Color Settings\n    Faster Color: %s\n    Slower Color: %s", faster, slower);
-	menu.AddItem("colors", sInfo);
 
 	menu.ExitBackButton = false;
 	menu.Display(client, MENU_TIME_FOREVER);
