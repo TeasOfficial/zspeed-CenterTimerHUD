@@ -4,8 +4,8 @@ CenterTimer is a SourceMod HUD plugin for [Shavit Timer](https://github.com/shav
 
 It is designed to make it easier for players to see their current run time and their finish time. This is especially useful for players who repeatedly grind map records(like strafe maps): the finish time/difference is displayed right in the center of the screen, rather than having to read it from the shavit timer's chat message.
 
-<img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/8347a193-13e1-43a9-badf-06a24564f754" />
-<img width="306" height="267" alt="image" src="https://github.com/user-attachments/assets/0d6da72c-d9f4-4957-952b-9f685480f7ae" />
+<img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/8347a193-13e1-43a9-badf-06a24564f754" /> 
+<img width="305" height="285" alt="image" src="https://github.com/user-attachments/assets/56a0ed05-efab-4944-a159-548c70f0687f" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14a17833-6c9d-42ce-8da2-443f74fcd92f" />
 
 
@@ -48,6 +48,9 @@ Both `/` and `!` work as chat triggers.
 Server owners can edit the macros near the top of `CenterTimer.sp` and recompile the plugin to change the initial settings used for **new players** (players who do not already have saved cookies). Examples include `DEFAULT_SHOW_TIME`, `DEFAULT_FINISH_TIME`, `FINISH_DIFF_DELAY`, `FINISH_TIME_DELAY`, default colors, and default HUD positions.
 
 Existing players keep their saved settings until their cookies are cleared.
+
+## Known Problems
+Due to HUD refresh limitations, the Finish Diff HUD can sometimes conflict with StrafeTrainer and fail to display properly. If you want to use it, please disable StrafeTrainer if possible.
 
 ## A Note on Time HUD Refresh Rate
 
