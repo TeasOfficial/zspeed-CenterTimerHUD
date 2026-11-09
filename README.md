@@ -6,7 +6,8 @@ It is designed to make it easier for players to see their current run time and t
 
 <img width="287" height="284" alt="image" src="https://github.com/user-attachments/assets/8347a193-13e1-43a9-badf-06a24564f754" />
 <img width="306" height="267" alt="image" src="https://github.com/user-attachments/assets/0d6da72c-d9f4-4957-952b-9f685480f7ae" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d4ff085c-cf91-45df-9723-1fd1de086b4d" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/14a17833-6c9d-42ce-8da2-443f74fcd92f" />
+
 
 ## Features
 
